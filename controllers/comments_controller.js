@@ -13,7 +13,15 @@ module.exports.create=function(req,res){
                     post.comments.push(comment);
                     post.save();
                     req.flash('success','comment created successfully');
-    
+                    if(req.xhr){
+                        return res.status(200).json({
+                            data:{
+                                comment:comment,
+                                name:req.user.name
+                            },
+                            message: 'Post created'
+                        })
+                    }
                     res.redirect('/');
                 }).catch(function(err){
                     if(err){
@@ -48,7 +56,14 @@ module.exports.destroy=function(req,res){
             {
                 let postId=comm.post;
                 comm.deleteOne();
-    
+                if(req.xhr){
+                    return res.status(200).json({
+                        data:{
+                            comment_id:req.params.id
+                        },
+                        message:"comment deleted "
+                    })
+                }
                 Post.findByIdAndUpdate(postId,{$pull:{comments: req.params.id}}).then(function(post){
                     req.flash('success','successfully deleted comment');
                     return res.redirect('back');

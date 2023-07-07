@@ -2,7 +2,7 @@ const Post = require('../models/post')
 const Comment = require('../models/comment')
 module.exports.create=function(req,res){
     try {
-        console.log('its user',req.user)
+        //console.log('its user',req.user)
         Post.create({
             
             content: req.body.content,
@@ -11,7 +11,7 @@ module.exports.create=function(req,res){
             
            p.name=req.user.name;
            //p["name"] = req.user.name;
-            console.log(p)
+            //console.log(p)
             if(req.xhr){
                 
                 return res.status(200).json({

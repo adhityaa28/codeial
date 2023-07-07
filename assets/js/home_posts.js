@@ -1,4 +1,7 @@
+
+
 {
+    
    let createPost=function()
    {
     let newpostform=$('#new-post-form');
@@ -15,7 +18,9 @@
                 let newPost= newpostDom(data.data.post,data.data.name);
                 $(`#post-list-container>ul`).prepend(newPost);
                 deletePost($('.delete-post-button', newPost))
-                console.log(data);
+                
+               
+                //console.log(data);
             },error: function(error){
                 console.log(error.responseText);
             }
@@ -40,7 +45,7 @@
                 </p>
                 <div class="post-comments">
                     
-                        <form action="/comments/create" method="POST">
+                        <form action="/comments/create"  id="new-comment-form" method="POST">
                             <input type="text" name="content" placeholder="add comment to the post">
                             <input type="hidden" name="post" value="${ post._id}">
                             <input type="submit" value="add comment">
@@ -73,5 +78,17 @@
     })
    }
 
+   
+   let deletepostclass =$('.delete-post-button')
+   
+   for(eachclass of deletepostclass)
+   {
+    deletePost(eachclass);
+   }
+
+   console.log("createpost working")
    createPost();
+
+    
+    
 }
