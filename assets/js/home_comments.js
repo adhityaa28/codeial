@@ -1,73 +1,104 @@
-{
-    let createComment=function(){
+// Let's implement this via classes
 
-        let newCommentForm=$('#new-comment-form');
-        newCommentForm.submit(function(e){
+// this class would be initialized for every post on the page
+// 1. When the page loads
+// 2. Creation of every post dynamically via AJAX
+
+ export class PostComments{
+    // constructor is used to initialize the instance of the class whenever a new instance is created
+    constructor(postId){
+        this.postId = postId;
+        this.postContainer = $(`#post-${postId}`);
+        this.newCommentForm = $(`#post-${postId}-comments-form`);
+
+        this.createComment(postId);
+
+        let self = this;
+        // call for all the existing comments
+        $(' .delete-comment-button', this.postContainer).each(function(){
+            self.deleteComment($(this));
+        });
+    }
+
+
+    createComment(postId){
+        let pSelf = this;
+        this.newCommentForm.submit(function(e){
             e.preventDefault();
-                    $.ajax({
-                        type:'post',
-                        url:'/comments/create',
-                        data:newCommentForm.serialize(),
-                        success: function(data){
-                            let newComment=newCommentDom(data.data.comment,data.data.name);
-                            $(`.post-comments-list>ul`).prepend(newComment);
-                            deletecomment($(`.delete-comment-button`,newComment))
+            let self = this;
+
+            $.ajax({
+                type: 'post',
+                url: '/comments/create',
+                data: $(self).serialize(),
+                success: function(data){
+                    console.log(data)
+                    let newComment = pSelf.newCommentDom(data.data.comment);
+                    $(`#post-comments-${postId}`).prepend(newComment);
+                    pSelf.deleteComment($(' .delete-comment-button', newComment));
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
+
+                }, error: function(error){
+                    console.log(error.responseText);
+                }
+            });
+
+
+        });
+    }
+
+
+    newCommentDom(comment){
+        // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
+        return $(`<li id="comment-${ comment._id }">
+                        <p>
                             
-        
-                           
-        
-                        },error: function(error){
-                            console.log(error.responseText);
-                        }
-                    })
-            
-    })
+                            <small>
+                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
+                            </small>
+                            
+                            ${comment.content}
+                            <br>
+                            <small>
+                                ${comment.user.name}
+                            </small>
+                        </p>    
 
-    }
-    let newCommentDom=function(comment,name)
-    {
-        
-        return $(`<li id="comment-${comment._id}">
-        <p>
-            
-                <small>
-                    <a class="delete-comment-button" href="comments/destory/${ comment._id}">X</a>
-                </small>
-            
-                ${ comment.content }
-            <br>
-            <small>
-            ${ name }
-            </small>
-        </p>
-    </li>`)
+                </li>`);
     }
 
 
-    let deletecomment=function(deletelink){
-        
-        $(deletelink).click(function(e){
+    deleteComment(deleteLink){
+        $(deleteLink).click(function(e){
             e.preventDefault();
-           $.ajax({
-            type:'get',
-            url:$(deletelink).prop('href'),
-            success: function(data){
-                $(`#comment-${data.data.comment_id}`).remove()
-            },error:function(err){
-                console.log(err.responseText);
 
-            }
-           })
-    
-        })
-    }
-    let deletecommentclass =$('.delete-comment-button')
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data){
+                    $(`#comment-${data.data.comment_id}`).remove();
 
-   for(eachclass of deletecommentclass)
-   {
-   deletecomment(eachclass);
-   }
-   console.log("createcomment working")
-     createComment();
-    
+                    new Noty({
+                        theme: 'relax',
+                        text: "Comment Deleted",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                        
+                    }).show();
+                },error: function(error){
+                    console.log(error.responseText);
+                }
+            });
+
+        });
     }
+}

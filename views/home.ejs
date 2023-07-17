@@ -6,11 +6,11 @@
         <% if(locals.user){%>
             <h4>Post</h4>
             <form action="posts/create" id="new-post-form" method="POST">
-                <textarea name="content" cols="30" placeholder="type here.." rows="3"></textarea>
+                <textarea name="content" cols="30" placeholder="type here.." rows="3" required></textarea>
                 <input type="submit" value="Post">
             </form>
         <%}%>
-        <div id="post-list-container">
+        <div id="posts-list-container">
             <ul>
                 <% for(post of posts){ %>
                     <%- include('_post') -%>
@@ -27,5 +27,5 @@
             </p>
         <%}%>
     </section>
-    <script src="/js/home_posts.js"></script>
-    <script src="/js/home_comments.js"></script>
+    <script type="module" src="/js/home_posts.js"></script>
+    <script  type="module" src="/js/home_comments.js"></script>

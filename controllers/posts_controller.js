@@ -7,17 +7,16 @@ module.exports.create=function(req,res){
             
             content: req.body.content,
             user:req.user._id
-        }).then(function(p){
+        }).then(async function(p){
             
-           p.name=req.user.name;
+           
            //p["name"] = req.user.name;
             //console.log(p)
             if(req.xhr){
-                
+                p= await p.populate('user', 'name');
                 return res.status(200).json({
                     data:{
-                        post:p,
-                        name: req.user.name
+                        post:p
                     },
                     message: 'Post created'
                 })
