@@ -10,9 +10,11 @@ module.exports.home=function(req,res){
         path:'comments',
         populate:{
             path:'user'
+        }, populate: {
+            path: 'likes'
         }
 
-    })
+    }).populate('likes')
     .then(function(post){
         User.find({}).then(function(users){
             return res.render('home',{

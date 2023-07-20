@@ -1,4 +1,5 @@
 import { PostComments } from "./home_comments.js";
+import { ToggleLike } from "./toggle_likes.js";
 {   //------------------------------------------------------------------------------------------
     
     let pc=function(c){
@@ -24,7 +25,9 @@ import { PostComments } from "./home_comments.js";
                    // console.log(data.data.post._id)
                    console.log(PostComments)
                    // new PostComments(data.data.post._id);
-                   pc(data.data.post._id)
+                   pc(data.data.post._id);
+
+                    new ToggleLike($(' .toggle-like-button', newPost));
                     new Noty({
                         theme: 'relax',
                         text: "Post published!",
@@ -55,6 +58,14 @@ import { PostComments } from "./home_comments.js";
                         <br>
                         <small>
                         ${ post.user.name }
+                        </small>
+                        <br>
+                        <small>
+                            
+                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+                                    0 Likes
+                                </a>
+                            
                         </small>
                     </p>
                     <div class="post-comments">
