@@ -34,7 +34,7 @@ export class ToggleLike{
     
     
                     $(self).attr('data-likes', likesCount);
-                    $(self).html(`${likesCount} Likes`);
+                    $(self).html(`<h3>${likesCount}  <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h3>`);
     
                 },error:function(errData) {
                     console.log(errData);

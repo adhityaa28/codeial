@@ -8,15 +8,16 @@ module.exports.home=function(req,res){
     .sort('-createdAt')
     .populate({
         path:'comments',
-        populate:{
-            path:'user'
-        }, populate: {
+         populate: {
             path: 'likes'
+        },populate:{
+            path:'user',
         }
 
     }).populate('likes')
     .then(function(post){
         User.find({}).then(function(users){
+            //console.log(post[0].comments[0])
             return res.render('home',{
                 title:'home',
                 posts: post,

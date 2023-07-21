@@ -47,27 +47,35 @@ import { ToggleLike } from "./toggle_likes.js";
 
     // method to create a post in DOM
     let newPostDom = function(post){
-        return $(`<li id="post-${post._id}">
-                    <p>
+        return $(`<li id="post-${post._id}" type="none" class="post-li">
+                    <div class="home-post">
+                        <div class="home-post-delete">
                         
-                        <small>
-                            <a class="delete-post-button"  href="/posts/destroy/${ post._id }">X</a>
-                        </small>
-                       
-                        ${ post.content }
-                        <br>
-                        <small>
+                        
+                            <a class="delete-post-button"  href="/posts/destroy/${ post._id }"><h3><i class="fa-solid fa-xmark" style="color: #dadadc;"></i></h3></a>
+                        
+                            </div>
+                            <div class="home-post-data">
+                            <p class="home-post-content">
+                            ${ post.content }
+                            </p>
+                        
+                        <p class="home-post-name">
                         ${ post.user.name }
-                        </small>
-                        <br>
-                        <small>
-                            
+                        </p>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div class="home-post-like">
                                 <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                                    0 Likes
+                                    <h3>0 <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h3>
                                 </a>
                             
-                        </small>
-                    </p>
+                                </div>             
+                                </div>
+                    
                     <div class="post-comments">
                         
                             <form id="post-${ post._id }-comments-form" action="/comments/create" method="POST">

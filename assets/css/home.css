@@ -1,0 +1,11 @@
+.friends-button{
+    color: rgb(137, 137, 139);
+    background-color: rgb(111, 111, 113);
+    position: fixed;
+    right: 0;
+    top: 10%;
+}
+
+.center{
+    text-align: center;
+}

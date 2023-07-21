@@ -1,8 +1,8 @@
-
-    <h1>codeial / <%= title%></h1>
+<link rel="stylesheet" href="/css/home.css">
+    <h2 class="center">Reach Out - <%= title%></h2>
    
 
-    <section id="feed-posts">
+    <section id="feed-posts" class=" center">
         <% if(locals.user){%>
             <h4>Post</h4>
             <form action="posts/create" id="new-post-form" method="POST">
@@ -19,19 +19,29 @@
         </div>
     </section>
 
+
+    <button class="btn friends-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Users</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Users</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
     <section id="user-friends">
-        <h4>Friends</h4>
+        
         <% for(u of all_users){%>
             <p>
                 <a href="/user/profile/<%= u.id%>"><%= u.name%></a>
             </p>
         <%}%>
     </section>
+  </div>
+</div>
+
+   
     <script type="module" src="/js/home_posts.js"></script>
     <script  type="module" src="/js/home_comments.js"></script>
 
     <script type="module" src="js/toggle_likes.js"></script>
-    <script>
-        
-       
-    </script>
+    
