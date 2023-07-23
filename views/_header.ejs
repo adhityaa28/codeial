@@ -2,7 +2,7 @@
     <h1>Reach Out</h1>
     <%if( locals.user ){%>
         <div>
-            <li type="none"><h2><a href="/user/profile"><%= user.name%> </a></h2></li>
+            <li type="none"><h2><a href="/user/profile/<%= user.id%>"><%= user.name%> </a></h2></li>
             <li type="none"><h2><a href="/user/sign-out">sign out </a></h2></li>
         </div>
         

@@ -3,6 +3,18 @@ body{
     margin: 0;
     
 }
+.home{
+    text-decoration: none;
+    background-color: aliceblue;
+    display: inline-block;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: fixed;
+    top: 100px;
+}
 
 header{
     background-color: rgb(28, 25, 25);

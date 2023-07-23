@@ -58,27 +58,26 @@ import { ToggleLike } from "./toggle_likes.js";
 
     newCommentDom(comment){
         // I've added a class 'delete-comment-button' to the delete comment link and also id to the comment's li
-        return $(`<li id="comment-${ comment._id }">
-                        <p>
-                            
-                            <small>
-                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}">X</a>
-                            </small>
-                            
-                            ${comment.content}
-                            <br>
-                            <small>
-                                ${comment.user.name}
-                            </small>
-                            <small>
-                            
+        return $(`<li id="comment-${ comment._id }" type="none">
+                        <div class="home-comment">
+                            <div class="home-comment-delete">
+                                <a class="delete-comment-button" href="/comments/destroy/${comment._id}"><h5><i class="fa-solid fa-xmark" style="color: #dadadc;"></i></h5></a>
+                            </div>
+                            <div class="home-comment-data">
+                                <p class="home-comment-content">
+                                    ${comment.content}
+                                </p>
+                                <p class="home-comment-name">
+                                    ${comment.user.name}
+                                </p>
+                            </div>
+                            <div class="home-comment-like">
                                 <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
-                                    0 Likes
+                                    <h5>0 <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h5>
+                                
                                 </a>
-                            
-                            </small>
-                        </p>    
-
+                            </div>
+                        </div>
                 </li>`);
     }
 

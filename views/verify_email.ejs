@@ -1,15 +1,16 @@
-<form method="POST" action='/auth/verify-email' class="login-form">
+<link rel="stylesheet" href="/css/verify-email.css">
 
-    <span class="login-signup-header">Verify Account</span>
-    <!-- {/* <% if(false){ %>
-    <div class="alert error-dailog">Error</div>
-    <% } %>
-     */} -->
-    <div class="field">
-      <input type="email" name='email' placeholder="Email" required />
-    </div>
+<div class="verify-email">
+  <div class="login-signup-header"><h1>Verify Account</h1></div>
+  <div class="verify-email-form">
+    <form method="POST" action='/auth/verify-email' class="login-form">
+      <div class="field">
+        <input class="input" type="email" name='email' placeholder="Email" required />
+      </div>
+      <div class="field">
+        <button class="submit" type="submit">Send Mail</button>
+      </div>
+    </form>
+  </div>
   
-    <div class="field">
-      <button type="submit">Send Mail</button>
-    </div>
-  </form>
+</div>

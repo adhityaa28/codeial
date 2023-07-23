@@ -1,12 +1,28 @@
+<link rel="stylesheet" href="/css/sign-in.css">
 
-<h1>codeial / <%=title%></h1>
+<div class="sign-in-div">
+    <div class="sign-in-heading "> 
+        <h1>Reach Out  <%=title%></h1>
+    </div>
+    
+    <div class="sign-in-box">
+        <form action="/user/create-session" method="POST">
+            <input type="email" name="email" required placeholder="Enter the email" class="input">
+            <br>
+            <input type="password" name="password" required placeholder="Enter the password" class="input">
+            <br>
+            <input type="submit" value="sign in"  class="submit">
+        </form>
+        <div class="Forgot-password" style="align-self: flex-end;margin-top: 1rem;">
+            <a class="a1" href="/auth/">Forgot Password ?</a>
+            <h2>OR</h2>
+        </div>
+        <div class="google">
+            <p>
+                <a class="a2"  href="/user/auth/google">Google Sign In/Sign up</a>
+            </p>
+        </div>
+        
+    </div>
+</div>
 
-<form action="/user/create-session" method="POST">
-    <input type="email" name="email" required placeholder="Enter the email">
-    <input type="password" name="password" required placeholder="Enter the password">
-    <input type="submit" value="sign in">
-</form>
-<div style="align-self: flex-end;margin-top: 1rem;"><a href="/auth/">Forgot Password ?</a></div>
-<p>
-    <a href="/user/auth/google">Google Sign In/Sign up</a>
-</p>

@@ -51,6 +51,7 @@ module.exports.toggleLike= async function(req,res){
                 
                 return res.status(200).json({
                     data:{
+                        type:req.query.type,
                         deleted:deleted
                     },
                     message: 'Post created'

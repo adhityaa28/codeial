@@ -23,6 +23,7 @@ export class ToggleLike{
                     let likesCount = parseInt($(self).attr('data-likes'));
                     console.log(likesCount);
                     if (data.data.deleted == true){
+                        //console.log(data.data)
                         if(likesCount!=0){
                             likesCount -= 1;
                         }
@@ -34,7 +35,12 @@ export class ToggleLike{
     
     
                     $(self).attr('data-likes', likesCount);
-                    $(self).html(`<h3>${likesCount}  <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h3>`);
+                    if(data.data.type=="Post"){
+                        $(self).html(`<h3>${likesCount}  <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h3>`);
+                    }else{
+                        $(self).html(`<h5>${likesCount}  <i class="fa-solid fa-thumbs-up" style="color: #dadadc;"></i></h5>`);
+                    }
+                    
     
                 },error:function(errData) {
                     console.log(errData);
